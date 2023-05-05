@@ -1,0 +1,40 @@
+class DSU{
+    int n,cnt;//n->given size, cnt-> number of components so far;
+    int[] prnt = new int[n];
+    int[] rank = new int[n];
+    int[] size = new int[n];
+    Dsu(int n){//contructor
+        this.n=n;
+        cnt=n;//initially n different components exist
+        Arrays.fill(size,1);
+        for(int i=0;i<n;i++) prnt[i]=i;
+    }
+    int find(int u){//find parent
+        if(u==prnt[u]) return u;
+        return prnt[u]=find(prnt[u]);
+    }
+    void unionR(int u,int v){//union by rank
+        int pu = find(u);
+        int pv = find(v);
+        if (pu == pv) return;
+        if (rank[pu] < rank[pv]) prnt[ulp_u] = ulp_v;
+        else if (rank[pv] < rank[pu]) prnt[ulp_v] = ulp_u;
+        else {
+            prnt[pv] = pu;
+            rank[pu]++;
+        }
+    }
+    void unionS(int u,int v){//union by size
+        int pu = find(u);
+        int pv = find(v);
+        if (pu == pv) return;
+        if (size[pu] < size[pv]) {
+            prnt[pu] = pv;
+            size[pv] += size[pu];
+        }
+        else {
+            prnt[pv] = pu;
+            size[pu] += size[pv];
+        }
+    }
+}
