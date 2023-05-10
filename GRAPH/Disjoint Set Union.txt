@@ -1,11 +1,12 @@
 class DSU{
     int n,cnt;//n->given size, cnt-> number of components so far;
-    int[] prnt = new int[n];
-    int[] rank = new int[n];
-    int[] size = new int[n];
+    int[] prnt,rank,size;
     Dsu(int n){//contructor
         this.n=n;
         cnt=n;//initially n different components exist
+        prnt = new int[n];
+        rank = new int[n];
+        size = new int[n];
         Arrays.fill(size,1);
         for(int i=0;i<n;i++) prnt[i]=i;
     }
