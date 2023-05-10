@@ -23,6 +23,7 @@ class DSU{
             prnt[pv] = pu;
             rank[pu]++;
         }
+        cnt--;
     }
     void unionS(int u,int v){//union by size
         int pu = find(u);
@@ -36,5 +37,6 @@ class DSU{
             prnt[pv] = pu;
             size[pu] += size[pv];
         }
+        cnt--
     }
 }
