@@ -1,4 +1,4 @@
-class DSU{
+class Dsu{
     int n,cnt;//n->given size, cnt-> number of components so far;
     int[] prnt,rank,size;
     Dsu(int n){//contructor
@@ -18,8 +18,8 @@ class DSU{
         int pu = find(u);
         int pv = find(v);
         if (pu == pv) return;
-        if (rank[pu] < rank[pv]) prnt[ulp_u] = ulp_v;
-        else if (rank[pv] < rank[pu]) prnt[ulp_v] = ulp_u;
+        if (rank[pu] < rank[pv]) prnt[pu] = pv;
+        else if (rank[pv] < rank[pu]) prnt[pv] = pu;
         else {
             prnt[pv] = pu;
             rank[pu]++;
