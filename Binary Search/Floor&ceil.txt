@@ -1,4 +1,4 @@
-int floor(int val){
+int floor(int val,List<Integer> lst){
     if(val<lst.get(0)) return -1;
     int i=0,j=lst.size()-1,mid=0;
     int ans=-1;
@@ -9,7 +9,7 @@ int floor(int val){
     }
     return j;
 }
-int ceil(int val){
+int ceil(int val,List<Integer> lst){
     if(val>lst.get(lst.size()-1)) return -1;
     int i=0,j=lst.size()-1,mid=0;
     while(i<=j){
