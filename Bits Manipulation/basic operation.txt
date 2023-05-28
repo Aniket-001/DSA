@@ -1,0 +1,9 @@
+int set(int n,int k){// n--->the number && k---> ith bit
+    return (n|(1<<k));
+}
+int unset(int n,int k){
+    return (n&(~(1<<k)));
+}
+boolean chck(int n,int k){
+    return (n&(1<<k))>0;
+}
