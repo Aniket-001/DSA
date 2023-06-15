@@ -1,0 +1,39 @@
+class Trie{
+    char ch;
+    boolean end;
+    Trie[] arr = new Trie[26];
+    Trie(char chr){
+        ch = chr;
+    }
+    void setT(){
+        end=true;
+    }
+    public String toString(){
+        return (ch+"-->"+end);
+    }
+    void insert(String s){
+        Trie t = this;
+        for(int i=0;i<s.length();i++){
+            char c = s.charAt(i);
+            if(t.arr[c-'a']!=null){
+                t = t.arr[c-'a'];
+                continue;
+            }
+            Trie tmp = new Trie(c);
+            t.arr[c-'a'] = tmp;
+            t = tmp;
+        }
+        t.setT();
+    }
+    boolean search(String s){
+        Trie t = this;
+        for(int i=0;i<s.length();i++){
+            char c = s.charAt(i);
+            if(t.arr[c-'a']!=null) return false;
+            Trie tmp = new Trie(c);
+            t.arr[c-'a'] = tmp;
+            t = tmp;
+        }
+        return t.end;
+    }
+}
