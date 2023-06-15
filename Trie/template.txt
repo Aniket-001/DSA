@@ -29,10 +29,8 @@ class Trie{
         Trie t = this;
         for(int i=0;i<s.length();i++){
             char c = s.charAt(i);
-            if(t.arr[c-'a']!=null) return false;
-            Trie tmp = new Trie(c);
-            t.arr[c-'a'] = tmp;
-            t = tmp;
+            if(t.arr[c-'a']==null) return false;
+            t=t.arr[c-'a'] = tmp;
         }
         return t.end;
     }
