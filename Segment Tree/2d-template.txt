@@ -1,0 +1,57 @@
+import java.util.*;
+//----2d Segment tree----
+class Seg{// for sum query
+    int m,n;
+    int[][] arr;
+    int[][] seg;
+    int[][] lzy;
+    Seg(int[][] a){
+        arr=a;
+        m=a.length;
+        n=a[0].length;
+        seg = new int[4*m][4*n];
+        buildX(0,0,m-1);
+    }
+    int[] sum(int[] a,int[] b){
+        int[] ans = new int[a.length];
+        for(int i=0;i<ans.length;i++) ans[i]=a[i]+b[i];
+        return ans;
+    }
+    void buildX(int ind,int l,int h){
+        if(l==h){
+            buildY(ind,l,0,0,n-1);
+            return;
+        }
+        int mid = (l+h)>>1;
+        buildX(2*ind+1,l,mid);
+        buildX(2*ind+2,mid+1,h);
+        seg[ind] = sum(seg[2*ind+1],seg[2*ind+2]);
+    }
+    void buildY(int x,int y,int ind,int l,int h){
+        if(l==h){
+            seg[x][ind] = arr[y][l];
+            return;
+        }
+        int mid = (l+h)>>1;
+        buildY(x,y,2*ind+1,l,mid);
+        buildY(x,y,2*ind+2,mid+1,h);
+        seg[x][ind] = seg[x][2*ind+1]+seg[x][2*ind+2];
+    }
+    int queryX(int x1,int y1,int x2,int y2,int i,int j,int ind){
+        if(i>x2 || j<x1) return 0;
+        else if(i>=x1 && j<=x2) return queryY(ind,y1,y2,0,n-1,0);
+        int mid = (i+j)>>1;
+        int lft = queryX(x1,y1,x2,y2,i,mid,2*ind+1);
+        int rght = queryX(x1,y1,x2,y2,mid+1,j,2*ind+2);
+        return lft+rght;
+    }
+    int queryY(int x,int y1,int y2,int i,int j,int ind){
+        if(i>y2 || j<y1) return 0;
+        else if(i>=y1 && j<=y2) return seg[x][ind];
+        int mid = (i+j)>>1;
+        int lft = queryY(x,y1,y2,i,mid,2*ind+1);
+        int rght = queryY(x,y1,y2,mid+1,j,2*ind+2);
+        return lft+rght;
+    }
+    
+}
