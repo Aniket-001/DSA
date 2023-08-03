@@ -1,0 +1,28 @@
+//-------Binary Index Tree or Fenwick tree-------
+class Bit{
+    int[] arr,bit;
+    Bit(int[] a){
+        arr=a;
+        bit = new int[arr.length+1];
+        for(int i=0;i<a.length;i++) updateP(i+1,a[i]);
+    }
+    void updateP(int ind,int val){//Point Update
+        while(ind<bit.length){
+            bit[ind] += val;
+            ind += ind&(-ind);
+        }
+        // System.out.println();
+    }
+    int query(int ind){// query fron 0->ind
+        int sum=0;
+        while(ind>0){
+            sum += bit[ind];
+            ind -= ind&(-ind);
+        }
+        return sum;
+    }
+    int queryR(int l,int r){
+        System.out.println();
+        return query(r)-query(l-1);
+    }
+}
