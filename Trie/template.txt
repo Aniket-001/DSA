@@ -11,7 +11,7 @@ class Trie{
     public String toString(){
         return (ch+"-->"+end);
     }
-    void insert(String s){
+    void insert(String s){// insert a string
         Trie t = this;
         for(int i=0;i<s.length();i++){
             char c = s.charAt(i);
@@ -25,7 +25,7 @@ class Trie{
         }
         t.setT();
     }
-    boolean search(String s){
+    boolean search(String s){// search a string
         Trie t = this;
         for(int i=0;i<s.length();i++){
             char c = s.charAt(i);
@@ -33,5 +33,19 @@ class Trie{
             t=t.arr[c-'a'] = tmp;
         }
         return t.end;
+    }
+    void dfs(Trie temp,String s){// traverse the trie
+        int chk=0;
+        for(int i=0;i<26;i++) {
+            if(temp.arr[i]!=null) chk=1;
+        }
+        if(chk==0){
+            System.out.println("String-->"+s);
+            return;
+        }
+        for(Trie t:temp.arr){
+            if(t==null) continue;
+            dfs(t,s+t.ch);
+        }
     }
 }
