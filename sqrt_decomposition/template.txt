@@ -1,0 +1,27 @@
+
+// sqrt decomposition for maximum;
+class Sqrt{
+    int[] arr;
+    int[] sqrt;
+    int sq=0;
+    Sqrt(int[] a){
+        arr = a;
+        sq = (int)Math.sqrt(a.length);
+        sqrt = new int[sq+1];
+        for(int i=0;i<a.length;i++){
+            int ind = i/sq;
+            sqrt[ind]  = Math.max(sqrt[ind],arr[i]);
+        }
+    }
+    int query(int i,int j){
+        int ans=0;
+        for(int x=i;x<=j;x++){
+            if(x%sq==1){
+                ans = Math.max(sqrt[x/sq],ans);
+                x+=4;
+            }
+            else ans = Math.max(arr[x],ans);
+        }
+        return ans;
+    }
+}
